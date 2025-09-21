@@ -24,8 +24,7 @@ def read_process_data():
     trips['place_slug_id'] = le_place.fit_transform(trips['place_slug'])
 
     # construct matrix
-    ones = np.ones(len(trips), np.uint32)
-    matrix = ss.coo_matrix((ones, (trips['username_id'], trips['place_slug_id'])))
+    matrix = pd.crosstab(trips['username_id'], trips['place_slug_id'])
 
     # decomposition
     svd = TruncatedSVD(n_components=5, n_iter=7, random_state=42)
